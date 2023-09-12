@@ -7,7 +7,7 @@ import { BodyType } from '../models/vehicle.model';
 @Injectable({
   providedIn: 'root'
 })
-export class BodytypeService {
+export class MasterTableListTable {
 
   constructor(private http:HttpClient) { }
   private baseUrl=environment.baseUrl;

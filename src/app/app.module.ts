@@ -50,8 +50,8 @@ import { RateTableDetailsUIComponent } from './feature/RateTable/ui/rate-table-d
 import { RateTableNameDialogComponent } from './feature/RateTable/ui/rate-table-name-dialog/rate-table-name-dialog.component';
 import { MasterTableComponent } from './feature/master/core/master-table/master-table.component';
 import { MasterTableListComponent } from './feature/master/ui/master-table-list/master-table-list.component';
-import { BodyTypeComponent } from './feature/master/core/master-table-list-table/master-table-list-table.component';
-import { BodyTypeListComponent } from './feature/master/ui/body-type-list/master-table-list-table-ui.component';
+import { MasterTableListTableComponent } from './feature/master/core/master-table-list-table/master-table-list-table.component';
+import { MasterTableListTableUI } from './feature/master/ui/body-type-list/master-table-list-table-ui.component';
 
 @NgModule({
   declarations: [
@@ -87,8 +87,9 @@ import { BodyTypeListComponent } from './feature/master/ui/body-type-list/master
     RateTableNameDialogComponent,
     MasterTableComponent,
     MasterTableListComponent,
-    BodyTypeComponent,
-    BodyTypeListComponent
+    MasterTableListTableUI,
+    MasterTableListTableComponent
+  
   
   ],
   imports: [

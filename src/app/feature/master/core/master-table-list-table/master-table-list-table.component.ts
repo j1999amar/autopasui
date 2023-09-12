@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { BodytypeService } from 'src/app/services/bodytype.service';
+import { MasterTableListTable } from 'src/app/services/master-table-list-table.service';
 
 @Component({
   selector: 'app-master-table-list-table',
   templateUrl: './master-table-list-table.component.html',
   styleUrls: ['./master-table-list-table.component.css']
 })
-export class BodyTypeComponent implements OnInit  {
-  constructor( private bodyTypeService:BodytypeService  ){ }
-  bodyTypeList:any[]=[]
+export class MasterTableListTableComponent implements OnInit  {
+  constructor( private masterTableList:MasterTableListTable  ){ }
+  tableTypeList:any[]=[]
   keys:string[]=[]
   
   ngOnInit(): void {
@@ -17,11 +17,11 @@ export class BodyTypeComponent implements OnInit  {
   }
 
   getAllBodyType(){
-    this.bodyTypeService.getBodyTypeTable()
+    this.masterTableList.getBodyTypeTable()
     .subscribe({
       next: (response) => {
-        this.bodyTypeList=response
-        this.keys=this.extractColumnNames(this.bodyTypeList)
+        this.tableTypeList=response
+        this.keys=this.extractColumnNames(this.tableTypeList)
         this.keys.push('action')
         console.log(this.keys)
 
