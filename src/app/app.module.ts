@@ -51,7 +51,7 @@ import { RateTableNameDialogComponent } from './feature/RateTable/ui/rate-table-
 import { MasterTableComponent } from './feature/master/core/master-table/master-table.component';
 import { MasterTableListComponent } from './feature/master/ui/master-table-list/master-table-list.component';
 import { MasterTableListTableComponent } from './feature/master/core/master-table-list-table/master-table-list-table.component';
-import { MasterTableListTableUI } from './feature/master/ui/body-type-list/master-table-list-table-ui.component';
+import { MasterTableListTableUI } from './feature/master/ui/master-table-list-table/master-table-list-table-ui.component';
 
 @NgModule({
   declarations: [
