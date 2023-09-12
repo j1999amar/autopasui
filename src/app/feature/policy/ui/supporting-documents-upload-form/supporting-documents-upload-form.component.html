@@ -1,0 +1,87 @@
+<ng-container>
+<section class="h-custom" style="background-color: #a6a6a9;">
+    <form [formGroup]="documentform"  (submit)="submit()">
+    <div class="page-header">
+        <h1 class="text-dark text-start"><b>UPLOAD RELEVENT DOCUMENTS</b></h1>
+    </div>
+    <div style="padding: 50px 100px 10px;" class="form-group list-group-item-dark">
+        <div class="row">
+            <div class="col-sm-3">
+                <h4><label for="usr"><label style="color:#FF0000;">*</label>Upload Aadhar</label></h4>
+            </div>
+            <div class="col-sm-3">
+                <input id="formFileAadhar" type="file" class="btn btn-primary" style="padding: 0px !important; width:80% !important" formControlName="fileAadhar" (change)="uploadadhar($event)" #file />
+                <svg *ngIf="editFlag" id="Adhar" width="25" height="16" class="bi bi-download" style="padding-left: 4px; vertical-align:text-top; cursor: pointer;"  formControlName = "fileAdharDownload" (click)="downloadFile($event)">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+            </div>
+            <div class="col-sm-3">
+                <h4><label for="usr">Upload PanCard</label></h4>
+            </div>
+            <div class="col-sm-3">
+                <input id="formFilePan" type="file" class="btn btn-primary" style="padding: 0px !important; width:80% !important" formControlName="filePan" (change)="uploadpan($event)" #file />
+                <svg  *ngIf="editFlag" id="Pan" width="25" height="16" class="bi bi-download" style="padding-left: 4px; vertical-align:text-top;cursor:pointer;" formControlName = "filePanDownload" (click)="downloadFile($event)">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h4><label for="usr">Upload Driving Licence</label></h4>
+            </div>
+            <div class="col-sm-3">
+                <input id="formFileLicence" type="file" class="btn btn-primary" style="padding: 0px !important; width:80% !important" formControlName="fileLicence" (change)="uploaddrivinglicense($event)" #file />
+                <svg *ngIf="editFlag" id="License" width="25" height="16" class="bi bi-download" style="padding-left: 4px; vertical-align:text-top; cursor:pointer;" formControlName = "fileLicenceDownload" (click)="downloadFile($event)">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+            </div>
+            <div class="col-sm-3">
+                <h4><label for="usr">Upload Vehicle Invoice</label></h4>
+            </div>
+            <div class="col-sm-3">
+                <input id="formFileInvoice" type="file" class="btn btn-primary" style="padding: 0px !important; width:80% !important" formControlName="fileInvoice" (change)="uploadinvoice($event)" #file />
+                <svg *ngIf="editFlag" id="Invoice" width="25" height="16" class="bi bi-download" style="padding-left: 4px; vertical-align:text-top; cursor:pointer;" formControlName = "fileInvoicedownload" (click)="downloadFile($event)">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h4><label for="usr">Upload Vehicle Picture</label></h4>
+            </div>
+            <div class="col-sm-3">
+                <input id="formFilePic" type="file" class="btn btn-primary" style="padding: 0px !important; width:80% !important" formControlName="filePic" (change)="uploadvehiclepic($event)" #file />
+                <svg *ngIf="editFlag" id="picture" width="25" height="16" class="bi bi-download" style="padding-left: 4px; vertical-align:text-top; cursor:pointer;" formControlName = "fileVehiclePicDownload" (click)="downloadFile($event)">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+            </div>
+            <div class="col-sm-3">
+                <h4><label for="usr"><label style="color:#FF0000;">*</label>Upload Vehicle RC</label></h4>
+            </div>
+            <div class="col-sm-3">
+                <input id="formFileRC" type="file" class="btn btn-primary" style="padding: 0px !important; width:80% !important" formControlName="fileRC" (change)="uploadrc($event)" #file />
+                <svg *ngIf="editFlag" id="RC" width="25" height="16" class="bi bi-download" style="padding-left: 4px; vertical-align:text-top; cursor:pointer;" formControlName = "fileRCDownload" (click)="downloadFile($event)">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div style="padding-left: 45%;" class="justify-content-end">
+                            <button type="button" class="btn btn-primary" (click)="Previous()" >Previous</button>&nbsp;
+                            <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+    </div>
+</form>
+
+</section>
+</ng-container>

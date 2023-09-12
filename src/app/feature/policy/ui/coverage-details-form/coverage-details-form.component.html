@@ -1,0 +1,47 @@
+<ng-container>
+    <section class="h-custom" style="background-color: #a6a6a9;">
+      <form [formGroup]="coverageform" (submit)="submit()">
+        <h1 class="text-dark text-start"><b>COVERAGES DETAILS</b></h1>
+        <div style="padding: 50px 100px 10px;" class="form-group list-group-item-dark">
+          <div class="row">
+            <div style="padding: 0px 250px 0px 200px">
+              <h3 style="font-weight: bold;">Coverages Needed : </h3>
+            </div>
+            <div style="padding: 0px 350px 0px">
+              <label style="display: block" formArrayName="coverages"
+                *ngFor="let coverage of coveragesFormArray.controls; let i = index">
+                <input  type="checkbox" [formControlName]="i">
+                {{Coverage[i].description}}
+              </label>
+            </div>
+            <div style="padding: 20px 250px 0px 200px" name="ncb" >
+              <h3 style="font-weight: bold;">Eligible for No Claim Bonus</h3>
+              <div style="padding: 0px 150px 0px">
+                <input type="radio" value="1" name="ncb" [(ngModel)]="ncb" [ngModelOptions]="{standalone: true}" > Yes
+                <input type="radio" value="0" name="ncb"  checked="true" [(ngModel)]="ncb" [ngModelOptions]="{standalone: true}" > No
+              </div>
+            </div>
+            <div style="padding: 10px 250px 0px 200px">
+              <h3 style="font-weight: bold;">Rating Method</h3>
+              <div style="padding: 0px 150px 0px">
+                <input type="radio" value="Regular" name="ratingMethod" checked="true" disabled="true"> Regular
+                <input type="radio" value="UBI" name="ratingMethod" disabled="true"> UBI
+                
+              </div>
+            </div>
+  
+          </div>
+          <div class="row">
+            <div>
+              <div style="padding: 20px 350px 10px;" class="justify-content-end">
+                <button type="button" class="btn btn-primary" (click)="Previous()">Previous</button>&nbsp;
+                <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+                <button type="button" class="btn btn-primary"(click)="SaveNext()">Save & Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </ng-container>
+  

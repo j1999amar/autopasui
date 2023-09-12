@@ -1,0 +1,117 @@
+
+<section class="h-custom" >
+  <button class="btn btn-primary" type="button" routerLink="/rating">Go Back</button>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h2 style="color: rgb(0, 0, 0);">Upload Rate Tables Factors (.csv)</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="rateTablesForm" enctype="multipart/form-data"
+          (ngSubmit)="onFileUpload(rateTablesForm.value)">
+          <div class="form-group list-group-item-dark" style="padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px;">
+            <label for="formFile" class="form-label" style="color: rgb(0, 0, 0);">Choose a CSV File: </label>
+            <input id="formFile" type="file" class="form-control-file" (change)="onFileChange($event)"
+              formControlName="file" #file />
+
+            <br>
+            <div *ngIf="selectFlag">
+              <label for="tableListDropdown" style="color: rgb(0, 0, 0);">Select a Rate Table:</label>
+              <select class="form-control" style="width: 150px;" id="tableListDropdown" #seltable (change)="onTableSelected(seltable.value)">
+                <option value="" disabled selected>Select Rate Table:</option>
+                <option *ngFor="let table of RateTables" [value]="table.id">{{ table.id }}</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit" style="justify-content: center;">Upload File</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div>
+    <h1>OR</h1>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h2 style="color: rgb(0, 0, 0);">Create Rate Tables Factors (.csv)</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group list-group-item-dark"  style="padding-left: 20px; padding-right: 20px; padding-top: 20px;">
+        <div>
+          <label for="tableListDropdown" style="color: rgb(0, 0, 0);">Select a Rate Table:</label>
+          <select class="form-control" style="width: 150px;" id="tableListDropdown" #seltable (change)="onTableSelected(seltable.value)">
+            <option value="" disabled selected>Select Rate Table:</option>
+            <option *ngFor="let table of RateTables" [value]="table.id">{{ table.id }}</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
+          <input type="text" [(ngModel)]="tableField" class="form-control" style="width: 150px;" />
+          <button class="btn btn-primary" type="button" (click)="AddField()">Add Field</button>
+        </div>
+        
+        <table style="width:100%;" align="left" border="1" class="table table-bordered table-striped">
+          <thead class="bg-light">
+            <tr>
+              <th *ngFor="let field of tableRow">{{ field }}</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let fetched of tableEntry">
+              <td *ngFor="let field of tableRow">
+                <div *ngIf="fetched.isEdit; else nonEdit">
+                  <input type="text" [(ngModel)]="fetched[field]" class="form-control" />
+              </div>
+              <ng-template #nonEdit>
+                  {{fetched[field]}}
+              </ng-template>
+              </td>
+              <td>
+                <div *ngIf="fetched.isEdit">
+                    <button (click)="afterEdit(fetched)" class="btn btn-sm btn-secondary"><i
+                            class="fa fa-save"></i>Save</button>
+                    <button (click)="fetched.isEdit = false" class="btn btn-sm btn-secondary"><i
+                            class="fa fa-undo"></i>Cancel</button>        
+                </div>
+                <div *ngIf="!fetched.isEdit">
+                    <button (click)="onEdit(fetched)" class="btn btn-sm btn-secondary"><i
+                            class="fa fa-edit"></i>Edit</button>   
+                      <button (click)="deleteEntry(fetched)" class="btn btn-sm btn-secondary"><i
+                              class="fa fa-edit"></i>Delete</button>     
+                </div>
+            </td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td *ngFor="let field of tableRow">
+                <input type="text" [(ngModel)]="newEntry[field]" class="form-control" />
+              </td>
+            </tr>
+            <tr *ngIf="secondFlag">
+              <td>
+                <button class="btn btn-sm btn-secondary" (click)="AddEntry(newEntry)"><i class="fa fa-edit"></i>+</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-primary" type="button" style="justify-content: center;"(click)="onFileCreate(newEntry)">Upload File</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

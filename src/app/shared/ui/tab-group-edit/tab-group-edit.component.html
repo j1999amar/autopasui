@@ -1,0 +1,37 @@
+<mat-tab-group #tabgroup [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChange($event)">
+
+    <mat-tab #tab1 label="Policy Details">
+        <app-policy-details-edit  (Next)="nextTab($event)"></app-policy-details-edit>
+
+        </mat-tab>
+
+    <mat-tab #tab2   label="Insured Details" >
+
+         <app-insured-details-edit (Next)="nextTab($event)" (Previous)="previousTab()"></app-insured-details-edit>
+
+        </mat-tab>
+
+    <mat-tab  #tab3   label="Vehicle Details"> 
+
+         <app-vehicle-details-edit (Next)="nextTab($event)" (Previous)="previousTab()"></app-vehicle-details-edit>
+
+        </mat-tab>
+
+     <mat-tab #tab4  label="Coverage Details">
+
+         <app-coverage-details-edit (Next)="nextTab($event)" (Previous)="previousTab()"></app-coverage-details-edit>
+
+        </mat-tab>
+    <mat-tab #tab5  label="Premium Details">
+
+            <app-premium-rating (Previous)="previousTab()"(Next)="nextTab($event)"></app-premium-rating>
+   
+    </mat-tab>   
+
+        <mat-tab #tab5 label="Document Upload">
+
+            <app-supporting-documents-upload-edit (Previous)="previousTab()"></app-supporting-documents-upload-edit>
+       
+        </mat-tab>
+
+    </mat-tab-group>

@@ -1,0 +1,174 @@
+<div class="search-bar">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+    </mat-form-field>
+    <button class="btn btn-primary" routerLink="/ratetables" >Create New Rate Table</button>
+</div>
+<div class="table-header">
+    <h2>Rate Tables</h2>
+</div>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.isEdit; else nonEdit"> <input type="text" [(ngModel)]="element.title"
+                        class="form-control" /> </div>
+                <ng-template #nonEdit>{{element.title}} </ng-template>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.isEdit; else nonEdit"> <input type="text" [(ngModel)]="element.description"
+                        class="form-control" /> </div>
+                <ng-template #nonEdit>{{element.description}} </ng-template>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="maintain">
+            <th mat-header-cell *matHeaderCellDef> Maintain Table </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.isEdit">
+                    <button (click)="afterTableEdit(element)" class="btn btn-sm btn-secondary"><i
+                            class="fa fa-save"></i>Save</button>
+                    <button (click)="element.isEdit = false" class="btn btn-sm btn-secondary"><i
+                            class="fa fa-undo"></i>Cancel</button>
+                </div>
+                <div *ngIf="!element.isEdit">
+                    <mat-icon class="icon" (click)="onEdit(element)">settings</mat-icon>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef> View Data </th>
+            <td mat-cell *matCellDef="let element"><mat-icon class="icon"
+                    (click)="getTableByName(element)">edit</mat-icon></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>
+<br>
+<br>
+<div *ngIf="editEntry">
+    <div class="container">
+        <div class="col-sm-12">
+            <div class="header-container">
+                <h2 style="color: #4d4d94;" class="sub-header">Listing {{tableRow.title}} Entries</h2>
+                <button class="btn btn-primary" (click)="closeTable()">Close</button>
+            </div>
+            
+            <table style="width:100%;" align="left" border="1" class="table table-bordered table-striped">
+                <thead class="bg-light">
+                    <tr>
+                        <th *ngFor="let field of tableRow.fields.split(',')">{{field}}</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <Tbody>
+                    
+                    <tr *ngFor="let fetched of DataTable">
+                            <td *ngFor="let field of tableRow.fields.split(',')">
+                                <div *ngIf="tableRow.id=='RT_GST'||tableRow.id=='RT_NCB'||tableRow.id=='RT_ODP'||tableRow.id=='RT_TPC'||tableRow.id=='RT_ODP'||tableRow.id=='RT_THEFT' else deftable">
+                                    <div *ngIf="field!='id' else isID ">
+                                    <div *ngIf="field!='factor' else isFactor">
+                                        <div *ngIf="fetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="fetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{fetched[field]}}
+                                        </ng-template>
+                                    </div>
+                                    <ng-template #isFactor>
+                                    <div *ngIf="fetched.isEdit; else nonEdit">
+                                        <input type="number"[(ngModel)]="fetched[field]" class="form-control" />
+                                    </div>
+                                    <ng-template #nonEdit>
+                                        {{fetched[field]}}
+                                    </ng-template>
+                                </ng-template>
+                                </div>
+                                <ng-template #isID>
+                                    {{fetched[field]}}
+                                </ng-template>
+                            </div>
+                            <ng-template #deftable>
+                            
+                                <div *ngIf="field!='id' else isID ">
+                                        <div *ngIf="fetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="fetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{fetched[field]}}
+                                        </ng-template>
+                                </div>
+                                <ng-template #isID>
+                                    {{fetched[field]}}
+                                </ng-template>
+                            </ng-template>
+                        </td>
+                        
+                        
+                        <td>
+                            <div *ngIf="fetched.isEdit">
+                                <button (click)="afterEdit(tableRow.id, fetched)" class="btn btn-sm btn-secondary"><i
+                                        class="fa fa-save"></i>Save</button>
+                                <button (click)="fetched.isEdit = false" class="btn btn-sm btn-secondary"><i
+                                        class="fa fa-undo"></i>Cancel</button>        
+                            </div>
+                            <div *ngIf="!fetched.isEdit">
+                                <button (click)="onEdit(fetched)" class="btn btn-sm btn-secondary"><i
+                                        class="fa fa-edit"></i>Edit</button>
+                                <button (click)="deleteEntry(tableRow.id,fetched.id)" class="btn btn-sm btn-secondary"><i
+                                        class="fa fa-edit"></i>Delete</button>        
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="addnewflag">
+                        <td *ngFor="let field of tableRow.fields.split(',')">
+                            <div *ngIf="tableRow.id=='RT_GST'||tableRow.id=='RT_NCB'||tableRow.id=='RT_ODP'||tableRow.id=='RT_TPC'||tableRow.id=='RT_ODP'||tableRow.id=='RT_THEFT' else deftable">
+                            <div *ngIf="field!='id' else isID ">
+                            <div *ngIf="field!='factor' else isfactor ">
+                                <input type="text" [(ngModel)]="newEntry[field]" class="form-control" />
+                            </div>
+                            <ng-template #isfactor>
+                                <input type="number" [(ngModel)]="newEntry[field]" class="form-control" />
+                            </ng-template>
+                            </div>
+                            <ng-template #isID>
+                                <button (click)="removeNewEntry()" class="btn btn-sm btn-secondary"><i
+                                    class="fa fa-edit"></i>-</button>
+                            </ng-template>
+                            </div>
+                            <ng-template #deftable>
+                                <div *ngIf="field!='id' else isID ">
+                                        <input type="text" [(ngModel)]="newEntry[field]" class="form-control" />
+                                    </div>
+                                    <ng-template #isID>
+                                        <button (click)="removeNewEntry()" class="btn btn-sm btn-secondary"><i
+                                            class="fa fa-edit"></i>-</button>
+                                    </ng-template>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <button (click)="addNewEntry(tableRow.id)" class="btn btn-sm btn-secondary">Add Entry</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button (click)="addnewflag=true" class="btn btn-sm btn-secondary"><i
+                                class="fa fa-edit"></i>+</button>
+                        </td>
+                    </tr>
+                </Tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

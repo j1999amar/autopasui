@@ -1,0 +1,374 @@
+<ng-container *ngIf="editFlag">
+    <section class="h-custom" style="background-color: #a6a6a9;">
+       <form [formGroup]="insuredForm" (ngSubmit)="PostInsured(insuredForm.value)">
+        <h1 class="text-dark text-start"><b>INSURED DETAILS EDIT</b></h1>
+        <div style = "padding: 50px 100px 10px;" class="form-group list-group-item-dark">
+            <div class="row">
+                <div class="col-sm-3">
+                <h4><label for="usr"><label style="color:#FF0000;">*</label>First Name:</label></h4>
+                    <input type="text" formControlName="FirstName"  (keypress)="keypressValidation.emit($event)" class="form-control" name="FirstName" id="FirstName" >
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['FirstName'].touched || submitted) && insuredFormControl['FirstName'].errors?.['required']">
+                                 First name is required
+                    </span> 
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['FirstName'].touched && insuredFormControl['FirstName'].errors?.['pattern']">
+                         First name can only have alphabets
+                    </span>               
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Last Name:</label></h3>
+                    <input type="text" formControlName="LastName" (keypress)="keypressValidation.emit($event)" class="form-control" name="LastName" id="LastName">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['LastName'].touched || submitted) && insuredFormControl['LastName'].errors?.['required']">
+                                 Last name is required
+                    </span>
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['LastName'].touched && insuredFormControl['LastName'].errors?.['pattern']">
+                         Last Name can only have alphabets
+                    </span>  
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Address Line1:</label></h3>
+                    <input type="text" formControlName="AddressLine1" class="form-control" name="AddressLine1" id="AddressLine1">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['AddressLine1'].touched || submitted) && insuredFormControl['AddressLine1'].errors?.['required']">
+                                 Address line1 is required
+                    </span>                 
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Address Line 2:</label></h3>
+                    <input type="text"  formControlName="AddressLine2" class="form-control" name="AddressLine2" id="AddressLine2">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['AddressLine2'].touched || submitted) && insuredFormControl['AddressLine2'].errors?.['required']">
+                                 Address line2 is required
+                    </span>  
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>City:</label></h3>
+                    <input type="text" formControlName="City" class="form-control" name="City" id="City">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['City'].touched || submitted) && insuredFormControl['City'].errors?.['required']">
+                                 City is required
+                    </span>
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['City'].touched && insuredFormControl['City'].errors?.['pattern']">
+                         City can only have alphabets
+                    </span> 
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>State:</label></h3>
+                    <input type="text" formControlName="State" (keypress)="keypressValidation.emit($event)" class="form-control" name="State" id="State">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['State'].touched || submitted) && insuredFormControl['State'].errors?.['required']">
+                                 State is required
+                    </span>
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['State'].touched && insuredFormControl['State'].errors?.['pattern']">
+                         State can only have alphabets
+                    </span>                 
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Pincode:</label></h3>
+                    <input type="text" formControlName="Pincode" (keypress)="keypressValidation.emit($event)"  class="form-control" name="Pincode" id="Pincode">
+                    <span class="text-validation"
+                        *ngIf="(insuredFormControl['Pincode'].touched || submitted) && insuredFormControl['Pincode'].errors?.['required']">
+                         Pincode is required
+                    </span>              
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['Pincode'].touched && insuredFormControl['Pincode'].errors?.['pattern']">
+                         Please enter a valid pin code
+                    </span>             
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Phone:</label></h3>
+                    <input type="text" formControlName ="Mobile" (keypress)="keypressValidation.emit($event)"  class="form-control" name="Mobile" id="Mobile">
+                    <span class="text-validation"
+                        *ngIf="(insuredFormControl['Mobile'].touched || submitted) && insuredFormControl['Mobile'].errors?.['required']">
+                         Mobile number is required
+                    </span>                  
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['Mobile'].touched && insuredFormControl['Mobile'].errors?.['pattern']">
+                         Please enter 10 digit mobile number.
+                    </span>              
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3><label for="usr">Email:</label></h3>
+                    <input type="text" formControlName = "Email" class="form-control" name="Email" id="Email">
+                    <span class="text-validation"
+                        *ngIf="(insuredFormControl['Email'].touched || submitted) && insuredFormControl['Email'].errors?.['required']">
+                        Please enter your email id.
+                    </span>                  
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['Email'].touched && insuredFormControl['Email'].errors?.['pattern']">
+                         Please enter a valid e-mail id.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">Aadhar Number:</label></h3>
+                    <input type="text" formControlName="AadharNumber" [value]="insuredDetails?.aadharNumber" (keypress)="keypressValidation.emit($event)" class="form-control" name="AadharNumber" id="AadharNumber">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['AadharNumber'].touched && insuredFormControl['AadharNumber'].errors?.['pattern']">
+                         Please enter a valid aadhar number.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">License Number:</label></h3>
+                    <input type="text" formControlName="LicenseNumber" (keypress)="keypressValidation.emit($event)" class="form-control" name="LicenseNumber" id="LicenseNumber">
+                <span class="text-validation"
+                    *ngIf="insuredFormControl['LicenseNumber'].touched && insuredFormControl['LicenseNumber'].errors?.['pattern']">
+                    Please enter a valid license number.
+                </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">PAN:</label></h3>
+                    <input type="text" formControlName="PanNumber" (keypress)="keypressValidation.emit($event)" class="form-control" name="PanNumber" id="PanNumber">
+                <span class="text-validation"
+                    *ngIf="insuredFormControl['PanNumber'].touched && insuredFormControl['PanNumber'].errors?.['pattern']">
+                     Please enter a valid pan number.
+                </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3><label for="usr">Bank Name:</label></h3>
+                    <input type="text" formControlName="BankName" (keypress)="keypressValidation.emit($event)" class="form-control" name="BankName" id="BankName">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['BankName'].touched && insuredFormControl['BankName'].errors?.['pattern']">
+                         Please enter a valid Bank Name.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">Bank Address:</label></h3>    
+                    <input type="text" formControlName="BankAddress" (keypress)="keypressValidation.emit($event)" class="form-control" name="BankAddress" id="BankAddress">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['BankAddress'].touched && insuredFormControl['BankAddress'].errors?.['pattern']">
+                         Please enter a valid Bank Address.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">Account Number:</label></h3>
+                    <input type="text" formControlName="AccountNumber" (keypress)="keypressValidation.emit($event)"  class="form-control" name="AccountNumber" id="AccountNumber">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['AccountNumber'].touched && insuredFormControl['AccountNumber'].errors?.['pattern']">
+                         Please enter a valid account number.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">IFSC Code:</label></h3>
+                    <input type="text" (keypress)="keypressValidation.emit($event)" formControlName="IfscCode" class="form-control" name="IfscCode" id="IfscCode">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['IfscCode'].touched && insuredFormControl['IfscCode'].errors?.['pattern']">
+                         Please enter a valid Ifsc code.
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style = "padding: 50px 100px 10px;" class="justify-content-end">
+                        <button type="button" class="btn btn-primary" (click)="Previous()">Previous</button>&nbsp;
+                        <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+                        <button type="button" class="btn btn-primary" (click)="SaveNext(insuredForm.value)">Save & Next</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    </section>
+</ng-container>
+<ng-container *ngIf="!editFlag">
+    <section class="h-custom" style="background-color: #a6a6a9;">
+       <form [formGroup]="insuredForm" (ngSubmit)="PostInsured(insuredForm.value)">
+        <h1 class="text-dark text-start"><b>INSURED DETAILS</b></h1>
+        <div style = "padding: 50px 100px 10px;" class="form-group list-group-item-dark">
+            <div class="row">
+                <div class="col-sm-3">
+                <h4><label for="usr"><label style="color:#FF0000;">*</label>First Name:</label></h4>
+                    <input type="text" formControlName="FirstName" (keypress)="keypressValidation.emit($event)" class="form-control" name="FirstName" id="FirstName">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['FirstName'].touched || submitted) && insuredFormControl['FirstName'].errors?.['required']">
+                                 First name is required
+                    </span> 
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['FirstName'].touched && insuredFormControl['FirstName'].errors?.['pattern']">
+                         First name can only have alphabets
+                    </span>               
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Last Name:</label></h3>
+                    <input type="text" formControlName="LastName" (keypress)="keypressValidation.emit($event)" class="form-control" name="LastName" id="LastName">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['LastName'].touched || submitted) && insuredFormControl['LastName'].errors?.['required']">
+                                 Last name is required
+                    </span>
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['LastName'].touched && insuredFormControl['LastName'].errors?.['pattern']">
+                         Last Name can only have alphabets
+                    </span>  
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Address Line1:</label></h3>
+                    <input type="text" formControlName="AddressLine1" class="form-control" name="AddressLine1" id="AddressLine1">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['AddressLine1'].touched || submitted) && insuredFormControl['AddressLine1'].errors?.['required']">
+                                 Address line1 is required
+                    </span>                 
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Address Line 2:</label></h3>
+                    <input type="text"  formControlName="AddressLine2" class="form-control" name="AddressLine2" id="AddressLine2">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['AddressLine2'].touched || submitted) && insuredFormControl['AddressLine2'].errors?.['required']">
+                                 Address line2 is required
+                    </span>  
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>City:</label></h3>
+                    <input type="text" formControlName="City" class="form-control" name="City" id="City">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['City'].touched || submitted) && insuredFormControl['City'].errors?.['required']">
+                                 City is required
+                    </span>
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['City'].touched && insuredFormControl['City'].errors?.['pattern']">
+                         City can only have alphabets
+                    </span> 
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>State:</label></h3>
+                    <input type="text" formControlName="State" (keypress)="keypressValidation.emit($event)" class="form-control" name="State" id="State">
+                    <span class="text-validation"
+                                *ngIf="(insuredFormControl['State'].touched || submitted) && insuredFormControl['State'].errors?.['required']">
+                                 State is required
+                    </span>
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['State'].touched && insuredFormControl['State'].errors?.['pattern']">
+                         State can only have alphabets
+                    </span>                 
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Pincode:</label></h3>
+                    <input type="text" formControlName="Pincode" (keypress)="keypressValidation.emit($event)"  class="form-control" name="Pincode" id="Pincode">
+                    <span class="text-validation"
+                        *ngIf="(insuredFormControl['Pincode'].touched || submitted) && insuredFormControl['Pincode'].errors?.['required']">
+                         Pincode is required
+                    </span>              
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['Pincode'].touched && insuredFormControl['Pincode'].errors?.['pattern']">
+                         Please enter a valid pin code
+                    </span>             
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr"><label style="color:#FF0000;">*</label>Phone:</label></h3>
+                    <input type="text" formControlName ="Mobile" (keypress)="keypressValidation.emit($event)"  class="form-control" name="Mobile" id="Mobile">
+                    <span class="text-validation"
+                        *ngIf="(insuredFormControl['Mobile'].touched || submitted) && insuredFormControl['Mobile'].errors?.['required']">
+                         Mobile number is required
+                    </span>                  
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['Mobile'].touched && insuredFormControl['Mobile'].errors?.['pattern']">
+                         Please enter 10 digit mobile number.
+                    </span>              
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3><label for="usr">Email:</label></h3>
+                    <input type="text" formControlName = "Email" class="form-control" name="Email" id="Email">
+                    <span class="text-validation"
+                        *ngIf="(insuredFormControl['Email'].touched || submitted) && insuredFormControl['Email'].errors?.['required']">
+                        Please enter your email id.
+                    </span>                  
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['Email'].touched && insuredFormControl['Email'].errors?.['pattern']">
+                         Please enter a valid e-mail id.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">Aadhar Number:</label></h3>
+                    <input type="text" formControlName="AadharNumber" (keypress)="keypressValidation.emit($event)" class="form-control" name="AadharNumber" id="AadharNumber">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['AadharNumber'].touched && insuredFormControl['AadharNumber'].errors?.['pattern']">
+                         Please enter a valid aadhar number.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">License Number:</label></h3>
+                    <input type="text" formControlName="LicenseNumber" (keypress)="keypressValidation.emit($event)" class="form-control" name="LicenseNumber" id="LicenseNumber">
+                <span class="text-validation"
+                    *ngIf="insuredFormControl['LicenseNumber'].touched && insuredFormControl['LicenseNumber'].errors?.['pattern']">
+                    Please enter a valid license number.
+                </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">PAN:</label></h3>
+                    <input type="text" formControlName="PanNumber" (keypress)="keypressValidation.emit($event)" class="form-control" name="PanNumber" id="PanNumber">
+                <span class="text-validation"
+                    *ngIf="insuredFormControl['PanNumber'].touched && insuredFormControl['PanNumber'].errors?.['pattern']">
+                     Please enter a valid pan number.
+                </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3><label for="usr">Bank Name:</label></h3>
+                    <input type="text" formControlName="BankName" (keypress)="keypressValidation.emit($event)" class="form-control" name="BankName" id="BankName">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['BankName'].touched && insuredFormControl['BankName'].errors?.['pattern']">
+                         Please enter a valid Bank Name.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">Bank Address:</label></h3>    
+                    <input type="text" formControlName="BankAddress" (keypress)="keypressValidation.emit($event)" class="form-control" name="BankAddress" id="BankAddress">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['BankAddress'].touched && insuredFormControl['BankAddress'].errors?.['pattern']">
+                         Please enter a valid Bank Address.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">Account Number:</label></h3>
+                    <input type="text" formControlName="AccountNumber" (keypress)="keypressValidation.emit($event)"  class="form-control" name="AccountNumber" id="AccountNumber">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['AccountNumber'].touched && insuredFormControl['AccountNumber'].errors?.['pattern']">
+                         Please enter a valid account number.
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <h3><label for="usr">IFSC Code:</label></h3>
+                    <input type="text" (keypress)="keypressValidation.emit($event)" formControlName="IfscCode" class="form-control" name="IfscCode" id="IfscCode">
+                    <span class="text-validation"
+                        *ngIf="insuredFormControl['IfscCode'].touched && insuredFormControl['IfscCode'].errors?.['pattern']">
+                         Please enter a valid Ifsc code.
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style = "padding: 50px 100px 10px;" class="justify-content-end">
+                        <button type="button" class="btn btn-primary" (click)="Previous()">Previous</button>&nbsp;
+                        <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+                        <button type="button" class="btn btn-primary" (click)="SaveNext(insuredForm.value)">Save & Next</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    </section>
+</ng-container>
+
+
+
+
+
+

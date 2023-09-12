@@ -1,0 +1,2 @@
+<app-rate-table-details-ui *ngIf="tableList.length>0"  [RateTables]="tableList" [DataTable]="DataTable" (UpdateRatetable)="UpdateTablelistById($event)"  (getTableByNameHandler)="GetTableByName($event)" (UpdatedEntryHandler)="UpdateEntry($event)" (AddNewEntryHandler)="AddNewEntry($event)" (DeleteEntryHandler)="DeleteEntry($event)"></app-rate-table-details-ui>
+

@@ -1,0 +1,201 @@
+<div class="container">
+    <h2 class="text-dark text-start"><b>Rate Tables Values</b></h2>
+    <div class="container">
+        <div style="padding: 50px 50px 10px;" class="form-group list-group-item-dark">
+            <div class="row" *ngFor=" let item of tableList">
+                <div class="col-sm-10">
+                    <h2 style="color: #4d4d94;" class="sub-header">Listing {{item.description}}</h2>
+                    <table style="width:100%;" align="left" border="1" class="table table-bordered table-striped">
+                        <thead class="bg-light">
+                            <tr >
+                                <th *ngFor="let field of item.fields.split(',')">{{field}}</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <Tbody *ngIf="item.id=='RT_NCB'">
+                            <tr *ngFor="let ncbfetched of fetchedNCB">
+
+                                <td *ngFor="let field of item.fields.split(',')">
+                                    <div *ngIf="field=='factor' else nonFactor ">
+                                        <div *ngIf="ncbfetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="ncbfetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{ncbfetched[field]}}
+                                        </ng-template>
+                                    </div> 
+                                    <ng-template #nonFactor>
+                                        {{ncbfetched[field]}}
+                                    </ng-template>
+                                </td>
+                                
+                                <!--<td><button (click)= "editRateNCB(ncbfetched.id)" class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i>Edit</button></td>-->
+                                <td>
+                                    <div *ngIf="ncbfetched.isEdit">
+                                        <button (click)="afterEditNCB(ncbfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-save"></i>Save</button>
+                                        <button (click)="ncbfetched.isEdit = false" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-undo"></i>Cancel</button>
+                                    </div>
+                                    <div *ngIf="!ncbfetched.isEdit">
+                                        <button (click)="onEdit(ncbfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-edit"></i>Edit</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </Tbody>
+                        <Tbody *ngIf="item.id=='RT_ODP'">
+                            <tr *ngFor="let odfetched of fetchedOD">
+
+                                <td *ngFor="let field of item.fields.split(',')">
+                                    <div *ngIf="field=='factor' else nonFactor ">
+                                        <div *ngIf="odfetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="odfetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{odfetched[field]}}
+                                        </ng-template>
+                                    </div> 
+                                    <ng-template #nonFactor>
+                                        {{odfetched[field]}}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <!--<button class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i>Edit</button>-->
+                                    <div *ngIf="odfetched.isEdit">
+                                        <button (click)="afterEditOD(odfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-save"></i>Ssave</button>
+                                        <button (click)="odfetched.isEdit = false" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-undo"></i>Cancel</button>
+                                    </div>
+                                    <div *ngIf="!odfetched.isEdit">
+                                        <button (click)="onEdit(odfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-edit"></i>Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </Tbody>
+                        <tbody *ngIf="item.id=='RT_TPC'">
+                            <tr *ngFor="let thirdpartyfetched of fetchedTPC">
+
+                                <td *ngFor="let field of item.fields.split(',')">
+                                    <div *ngIf="field=='factor' else nonFactor ">
+                                        <div *ngIf="thirdpartyfetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="thirdpartyfetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{thirdpartyfetched[field]}}
+                                        </ng-template>
+                                    </div> 
+                                    <ng-template #nonFactor>
+                                        {{thirdpartyfetched[field]}}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <div *ngIf="thirdpartyfetched.isEdit">
+                                        <button (click)="afterEditTP(thirdpartyfetched)"
+                                            class="btn btn-sm btn-secondary"><i class="fa fa-save"></i>Save</button>
+                                        <button (click)="thirdpartyfetched.isEdit = false"
+                                            class="btn btn-sm btn-secondary"><i class="fa fa-undo"></i>Cancel</button>
+                                    </div>
+                                    <div *ngIf="!thirdpartyfetched.isEdit">
+                                        <button (click)="onEdit(thirdpartyfetched)"
+                                            class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i>Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="item.id=='RT_GST'">
+                            <tr *ngFor="let gstfetched of fetchedGST">
+                                <td *ngFor="let field of item.fields.split(',')">
+                                    <div *ngIf="field=='factor' else nonFactor ">
+                                        <div *ngIf="gstfetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="gstfetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{gstfetched[field]}}
+                                        </ng-template>
+                                    </div> 
+                                    <ng-template #nonFactor>
+                                        {{gstfetched[field]}}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <div *ngIf="gstfetched.isEdit">
+                                        <button (click)="afterEditgst(gstfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-save"></i>Save</button>
+                                        <button (click)="gstfetched.isEdit = false" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-undo"></i>Cancel</button>
+                                    </div>
+                                    <div *ngIf="!gstfetched.isEdit">
+                                        <button (click)="onEdit(gstfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-edit"></i>Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="item.id=='RT_THEFT'">
+                            <tr *ngFor="let theftfetched of fetchedTF">
+                                <td *ngFor="let field of item.fields.split(',')">
+                                    <div *ngIf="field=='factor' else nonFactor ">
+                                        <div *ngIf="theftfetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="theftfetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{theftfetched[field]}}
+                                        </ng-template>
+                                    </div> 
+                                    <ng-template #nonFactor>
+                                        {{theftfetched[field]}}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <div *ngIf="theftfetched.isEdit">
+                                        <button (click)="afterEdittheft(theftfetched)"
+                                            class="btn btn-sm btn-secondary"><i class="fa fa-save"></i>Save</button>
+                                        <button (click)="theftfetched.isEdit = false"
+                                            class="btn btn-sm btn-secondary"><i class="fa fa-undo"></i>Cancel</button>
+                                    </div>
+                                    <div *ngIf="!theftfetched.isEdit">
+                                        <button (click)="onEdit(theftfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-edit"></i>Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="item.id=='RT_LLP'">
+                            <tr *ngFor="let llpfetched of fetchedLLP">
+                                <td *ngFor="let field of item.fields.split(',')">
+                                    <div *ngIf="field=='factor' else nonFactor ">
+                                        <div *ngIf="llpfetched.isEdit; else nonEdit">
+                                            <input type="text" [(ngModel)]="llpfetched[field]" class="form-control" />
+                                        </div>
+                                        <ng-template #nonEdit>
+                                            {{llpfetched[field]}}
+                                        </ng-template>
+                                    </div> 
+                                    <ng-template #nonFactor>
+                                        {{llpfetched[field]}}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <div *ngIf="llpfetched.isEdit">
+                                        <button (click)="afterEditLLP(llpfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-save"></i>Save</button>
+                                        <button (click)="llpfetched.isEdit = false" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-undo"></i>Cancel</button>
+                                    </div>
+                                    <div *ngIf="!llpfetched.isEdit">
+                                        <button (click)="onEdit(llpfetched)" class="btn btn-sm btn-secondary"><i
+                                                class="fa fa-edit"></i>Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

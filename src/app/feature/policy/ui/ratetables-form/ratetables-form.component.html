@@ -1,0 +1,38 @@
+<section>
+<mat-card-header>
+    <mat-toolbar class="toolbar">
+        <mat-card-title>Edit Rate Table</mat-card-title>
+    </mat-toolbar>
+</mat-card-header>   
+    <form [formGroup]="rateTablesListForm" (submit)="onSubmit()">
+        <div class="container" >  
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="">Id{{data.factor}}_value</label>
+                        <input type="text" formControlName="id" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="">No Claim Year</label>
+                        <input type="text" formControlName="no_claim_year" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="">Value of the Factor</label>
+                        <input type="text" formControlName="factor" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,3 @@
+<app-insured-details-form  (insuredDetailsPost)="insuredDetailsPost($event)" *ngIf="insuredDetails.length>0 && contactDetails.length>0" [contactDetails]="contactDetails" [insuredDetails]="insuredDetails"
+[submitted]="submitted" [flag]="submitFlag" [insuredForm]="insuredForm" (insuredFormValid) = "insuredFormValidCheck($event)"
+(keypressValidation)="keypressValidation($event)" (SaveNextHandler)="SaveNextHandler()" (PreviousHandler)="PreviousHandler()"></app-insured-details-form>

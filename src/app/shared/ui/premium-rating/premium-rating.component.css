@@ -1,0 +1,18 @@
+
+  .table-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    height: 80px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #000000;
+    margin: 0;
+  }
+
+  .icon {
+    font-size: 20px;
+  }

@@ -1,0 +1,9 @@
+
+<mat-dialog-content>
+  <p>Enter Table Name:</p>
+  <input matInput [(ngModel)]="userInput" />
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="userInput" cdkFocusInitial>OK</button>
+</mat-dialog-actions>

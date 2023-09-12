@@ -1,0 +1,38 @@
+.custom-table {
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+.table-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-row {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.table-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+.icon {
+    font-size: 18px;
+}
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+  }
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}

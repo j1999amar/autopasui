@@ -1,0 +1,246 @@
+<form [formGroup]="vehicleForm" (ngSubmit)="PostVehicle(vehicleForm.value)">
+    <ng-container>
+        <section class="h-custom" style="background-color: #a6a6a9;">
+            <h1 class="text-dark text-start"><b>VEHICLE DETAILS</b></h1>
+            <div style="padding: 50px 100px 10px;" class="form-group list-group-item-dark">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h4><label for="usr"><label style="color:#FF0000;">*</label>Registration No</label></h4>
+                        <input type="text" formControlName="RegistrationNumber" (keypress)="KeyPress($event)" class="form-control" name="RegistrationNumber" required="true" id="txtRegno">
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['RegistrationNumber'].touched || submitted) && vehicleFormControl['RegistrationNumber'].errors?.['required']">
+                            Registration number is required
+                        </span>
+                        <span class="text-validation"
+                            *ngIf="vehicleFormControl['RegistrationNumber'].touched && vehicleFormControl['RegistrationNumber'].errors?.['pattern']">
+                            Please enter a valid registration number
+                        </span>  
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>RTO State</label></h3>
+                        <select class="form-select" formControlName = "Rtostate" name="Rtostate" required="true" id="ddlState"#selstate (change)='GetRTOCityByState(selstate.value)'>
+                            <option value="" disabled selected>Select RTO State</option>
+                            <option *ngFor="let item of RTOStates" [value]="item.state">{{item.state}}</option>
+                        
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['Rtostate'].touched || submitted) && vehicleFormControl['Rtostate'].invalid">
+                           RTO state is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>RTO City</label></h3>
+                        <select class="form-select" formControlName="Rtocity" name="Rtocity" required="true" id="ddlCity" #selcity (change)='GetRTONameByCity(selcity.value)'>
+                            <option value=""  selected >Select RTO City</option>
+                            <option *ngFor="let item of RTOCities" [value]="item.city">{{item.city}}</option>
+                
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['Rtocity'].touched || submitted) && vehicleFormControl['Rtocity'].invalid">
+                           RTO city is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>RTO Name</label></h3>
+                        <select class="form-select" formControlName = "RTOId" name="RTOId" required="true" id="ddlRTOName">
+                            <option value="0" selected>Select RTO Name</option>
+                            <option *ngFor="let item of RTOs" [value]="item.rtoId">{{item.rtoName}}</option>
+            
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['RTOId'].touched || submitted) && vehicleFormControl['RTOId'].invalid">
+                          RTO Name is required
+                        </span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Date of Purchase</label></h3>
+                        <input type="date" formControlName="DateOfPurchase" name="DateOfPurchase" class="form-control" name="DateOfPurchase" placeholder="dd-mm-yyyy" id="txtDop">
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['DateOfPurchase'].touched || submitted) && vehicleFormControl['DateOfPurchase'].invalid">
+                          Date Of purchase is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Vehicle type</label></h3>
+                        <select class="form-select" formControlName = "VehicleTypeid" name="VehicleTypeid" required="true" id="ddlVehType" #selvehicle (change)='GetBrand(selvehicle.value)'>
+                            <option value=""  selected >Select Vehicle Type</option>
+                            <option *ngFor="let item of VehicleTypes" [value]=item.vehicleTypeId>{{item.vehicleType}}</option>
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['VehicleTypeid'].touched || submitted) && vehicleFormControl['VehicleTypeid'].invalid">
+                          Vehicle type is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Brand</label></h3>
+                        <select class="form-select" formControlName="BrandId" name="BrandId" required="true" id="ddlBrand" #selbrand (change)='GetModels(selbrand.value)'>
+                            <option value=""  selected>Select Brand</option>
+                            <option *ngFor="let item of Brands" [value]="item.brandId">{{item.brand}}</option>
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['BrandId'].touched || submitted) && vehicleFormControl['BrandId'].invalid">
+                          Brand is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Model</label></h3>
+                        <select class="form-select" formControlName="ModelId" name="ModelId" required="true" id="ddlModel" #selmodel (change)=' GetFuelType(selmodel.value)'>
+                            <option value=""  selected>Select Model</option>
+                            <option *ngFor="let item of Models" [value]="item.modelId">{{item.modelName}}</option>
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['ModelId'].touched || submitted) && vehicleFormControl['ModelId'].invalid">
+                          Model is required
+                        </span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Fuel Type</label></h3>
+                        <select class="form-select" formControlName="FuelTypeId" required="true" id="ddlFuel" name="FuelTypeId" #selfuel (change)='GetTransmissionType(selmodel.value,selfuel.value)'>
+                            <option value=""  selected >Select Fuel Type</option>
+                            <option *ngFor="let item of FuelTypes" [value]="item.fuelTypeId">{{item.fuelType}}</option>
+                        </select>
+                        <span class="text-validation"
+                                *ngIf="(vehicleFormControl['FuelTypeId'].touched || submitted) && vehicleFormControl['FuelTypeId'].errors?.['required']">
+                                Fuel type is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Transmission Type</label></h3>
+                        <select class="form-select" formControlName="TransmissionTypeId" name="TransmissionTypeId" required="true" id="ddlTransType" #seltrans (change)='GetVariant(selfuel.value,selmodel.value,seltrans.value)' >
+                            <option value=""  selected>Select Transmission Type</option>
+                            <option *ngFor="let item of TransmissionTypes" [value]="item.transmissionTypeId">{{item.transmissionType}}</option>
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['TransmissionTypeId'].touched || submitted) && vehicleFormControl['TransmissionTypeId'].invalid">
+                          Transmission type is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Variant</label></h3>
+                        <select class="form-select" formControlName="VariantId" name="VariantId" required="true" id="ddlVariant">
+                            <option value="" selected>Select Variant</option>
+                            <option *ngFor="let item of Variants" [value]="item.variantId">{{item.variant}}</option>
+                        </select>
+                        <span class="text-validation"
+                          *ngIf="(vehicleFormControl['VariantId'].touched || submitted) && vehicleFormControl['VariantId'].invalid">
+                          Variant is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Chassis Number</label></h3>
+                        <input type="text" formControlName="ChasisNumber" (keypress)="KeyPress($event)" name="ChasisNumber" class="form-control" required="true" id="txtChassisno">
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['ChasisNumber'].touched || submitted) && vehicleFormControl['ChasisNumber'].errors?.['required']">
+                            Chasis Number is required
+                        </span>
+                        <span class="text-validation"
+                            *ngIf="vehicleFormControl['ChasisNumber'].touched && vehicleFormControl['ChasisNumber'].errors?.['pattern']">
+                            Please enter a valid chasis number
+                        </span> 
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Engine Number</label></h3>
+                        <input type="text" formControlName="EngineNumber" (keypress)="KeyPress($event)" name="EngineNumber" class="form-control" required="true" id="txtEngineNo">
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['EngineNumber'].touched || submitted) && vehicleFormControl['EngineNumber'].errors?.['required']">
+                            Engine Number is required
+                        </span>
+                        <span class="text-validation"
+                            *ngIf="vehicleFormControl['EngineNumber'].touched && vehicleFormControl['EngineNumber'].errors?.['pattern']">
+                            Please enter a valid engine number
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Cubic Capacity</label></h3>
+                        <input type="text" formControlName="CubicCapacity" (keypress)="KeyPress($event)" name="CubicCapacity" class="form-control" required="true" id="txtCC" >
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['CubicCapacity'].touched || submitted) && vehicleFormControl['CubicCapacity'].errors?.['required']">
+                            Cubic capacity is required
+                        </span>
+                        <span class="text-validation"
+                            *ngIf="vehicleFormControl['CubicCapacity'].touched && vehicleFormControl['CubicCapacity'].errors?.['pattern']">
+                            Please enter a valid cubic capacity
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Seating Capacity</label></h3>
+                        <input type="text" formControlName="SeatingCapacity" (keypress)="KeyPress($event)" name="SeatingCapacity" class="form-control" required="true" id="txtSC">
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['SeatingCapacity'].touched || submitted) && vehicleFormControl['SeatingCapacity'].errors?.['required']">
+                            Seating capacity is required
+                        </span>
+                        <span class="text-validation"
+                            *ngIf="vehicleFormControl['SeatingCapacity'].touched && vehicleFormControl['SeatingCapacity'].errors?.['pattern']">
+                            Please enter a valid seating capacity
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Year of Manufacture</label></h3>
+                        <input formControlName="YearOfManufacture" (keypress)="KeyPress($event)" name="YearOfManufacture" type="text"  step="1" id="txtYOM" class="form-control" required="true">
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['YearOfManufacture'].touched || submitted) && vehicleFormControl['YearOfManufacture'].errors?.['required']">
+                            Year Of manufacture is required
+                        </span>
+                        <span class="text-validation"
+                            *ngIf="vehicleFormControl['YearOfManufacture'].touched && vehicleFormControl['YearOfManufacture'].errors?.['yearRange']">
+                            Please enter a valid year of manufacture
+                        </span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Body Type</label></h3>
+                        <select class="form-select" formControlName="BodyTypeId" name="BodyTypeId" required="true" id="ddlBodyType">
+                            <option value="" [selected]>Select Body Type</option>
+                            <option *ngFor="let item of BodyTypes" [value]="item.bodyTypeId">{{item.bodyType}}</option>
+                        </select>
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['BodyTypeId'].touched || submitted) && vehicleFormControl['BodyTypeId'].errors?.['required']">
+                            Body type is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Colour</label></h3>
+                        <input type="text" formControlName="Color" name="Color" class="form-control" required="true" id="txtColour">
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['Color'].touched || submitted) && vehicleFormControl['Color'].errors?.['required']">
+                             Color is required
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3><label for="usr"><label style="color:#FF0000;">*</label>Ex-Showroom Price</label></h3>
+                        <input type="number" formControlName="ExShowroomPrice" name="ExShowroomPrice" class="form-control" required="true" id="txtPrice">
+                        <span class="text-validation"
+                            *ngIf="(vehicleFormControl['ExShowroomPrice'].touched || submitted) && vehicleFormControl['ExShowroomPrice'].errors?.['required']">
+                            Ex-showroom price is required
+                        </span>
+                        <span class="text-validation"
+                            *ngIf="vehicleFormControl['ExShowroomPrice'].touched && vehicleFormControl['ExShowroomPrice'].errors?.['pattern']">
+                            Please enter a valid ex-showroom price
+                        </span> 
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div style="padding: 50px 100px 10px;" class="justify-content-end">
+                            <button type="button" class="btn btn-primary" (click)="Previous()">Previous</button>&nbsp;
+                            <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+                            <button type="button" class="btn btn-primary" (click)="SaveNext(vehicleForm.value)">Save & Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-container>
+</form>

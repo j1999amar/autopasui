@@ -1,0 +1,37 @@
+<mat-tab-group #tabgroup [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChange($event)">
+
+    <mat-tab #tab1 label="Policy Details">
+        <app-policy-details (Next)="nextTab($event)"></app-policy-details>
+
+    </mat-tab>
+
+    <mat-tab #tab2 [disabled]='!policyFlag' label="Insured Details">
+
+        <app-insured-details (Next)="nextTab($event)" (Previous)="previousTab()"></app-insured-details>
+
+    </mat-tab>
+
+    <mat-tab #tab3 [disabled]='!insuredFlag' label="Vehicle Details">
+
+        <app-vehicle-details (Next)="nextTab($event)" (Previous)="previousTab()"></app-vehicle-details>
+
+    </mat-tab>
+
+    <mat-tab #tab4 [disabled]='!vehicleFlag' label="Coverage Details">
+
+        <app-coverage-details (Next)="nextTab($event)" (Previous)="previousTab()"></app-coverage-details>
+
+    </mat-tab>
+    <mat-tab #tab5 [disabled]='!coverageFlag' label="Premium Details">
+
+        <app-premium-rating (Previous)="previousTab()" (Next)="nextTab($event)"></app-premium-rating>
+
+    </mat-tab>
+
+    <mat-tab #tab5 [disabled]='!premiumFlag' label="Document Upload">
+
+        <app-supporting-documents-upload (Previous)="previousTab()"></app-supporting-documents-upload>
+   
+    </mat-tab>
+
+    </mat-tab-group>

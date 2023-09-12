@@ -1,0 +1,1 @@
+<app-ratetables-upload-form *ngIf="tableList.length>0"  [RateTables]="tableList" (OnFileUploadHandler)="OnFileUpload($event)" (OnFileCreateHandler)="OnFileCreate($event)"></app-ratetables-upload-form>

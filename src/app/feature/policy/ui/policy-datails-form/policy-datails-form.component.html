@@ -1,0 +1,141 @@
+<ng-container *ngIf="editFlag">
+    <section class="h-custom" style="background-color: #a6a6a9;">
+  <form #policyDetailsForm="ngForm" [formGroup]="policyForm" (ngSubmit)="PostPolicy(policyDetailsForm.value)">
+    <h1 class="text-dark text-start"><b>POLICY DETAILS EDIT</b></h1>
+    <div style = "padding: 50px 100px 10px;" class="form-group list-group-item-dark">
+      <div class="row">
+        <div class="col-sm-5">
+        <label for="startDate"><label style="color:#FF0000;">*</label>Poilcy Effective Date:</label>
+        </div>
+        <div class="col-sm-5">
+        <input type="date" formControlName="PolicyEffectiveDt" class="form-control" name="PolicyEffectiveDt" id="PolicyEffectiveDt"  [(ngModel)]="PolicyEffectiveDt"(input)="CalculateDifference()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="col-sm-5">
+        <span class="text-validation"
+    *ngIf="(policyFormControl['PolicyEffectiveDt'].touched || submitted) && policyFormControl['PolicyEffectiveDt'].errors?.['required']">
+     Please enter a valid policy effective date
+  </span>
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-5">
+    <label for="endDate"><label style="color:#FF0000;">*</label>Poilcy Expiration  Date:</label>  
+    </div>
+    <div class="col-sm-5">
+    <input type="date" formControlName="PolicyExpirationDt" class="form-control" name="PolicyExpirationDt" id="PolicyExpirationDt"  [(ngModel)]="PolicyExpirationDt" (input)="CalculateDifference()">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="col-sm-5">
+    <span class="text-validation"
+    *ngIf="(policyFormControl['PolicyExpirationDt'].touched || submitted) && policyFormControl['PolicyExpirationDt'].errors?.['required']">
+     Please enter a valid policy expiration date
+    </span> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+    <label for="endDate">Term:</label>
+    </div>
+    <div class="col-sm-5">  
+    <input type="number" formControlName="Term" class="form-control" name="Term" id="Term"   [(ngModel)]="Term" readonly >
+    </div>
+    </div>
+  <div class="row">
+    <div class="col-sm-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="col-sm-5">
+    <span class="text-validation"
+    *ngIf="(policyFormControl['Term'].touched || submitted) && policyFormControl['Term'].errors?.['pattern']">
+     Term should be 1 or greater than 1
+    </span> 
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-6">
+      <div style = "padding: 50px 100px 10px;" class="justify-content-end">
+            <button type="submit" class="btn btn-primary">Save</button>
+            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" (click)="SaveNext(policyDetailsForm.value)" >Next</button>
+          </div>
+          </div>
+      </div>
+  </div>
+  </form>
+  </section>
+  </ng-container>
+  <ng-container *ngIf="!editFlag">
+    <section class="h-custom" style="background-color: #a6a6a9;">
+  <form #policyDetailsForm="ngForm" [formGroup]="policyForm" (ngSubmit)="PostPolicy(policyDetailsForm.value)">
+    <h1 class="text-dark text-start"><b>POLICY DETAILS</b></h1>
+    <div style = "padding: 50px 100px 10px;" class="form-group list-group-item-dark">
+      <div class="row">
+        <div class="col-sm-5">
+        <label for="startDate"><label style="color:#FF0000;">*</label>Poilcy Effective Date:</label>
+        </div>
+        <div class="col-sm-5">
+        <input type="date" formControlName="PolicyEffectiveDt" class="form-control" name="PolicyEffectiveDt" id="PolicyEffectiveDt" [(ngModel)]="PolicyEffectiveDt"(input)="CalculateDifference()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="col-sm-5">
+        <span class="text-validation"
+    *ngIf="(policyFormControl['PolicyEffectiveDt'].touched || submitted) && policyFormControl['PolicyEffectiveDt'].errors?.['required']">
+     Please enter a valid policy effective date
+  </span>
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-5">
+    <label for="endDate"><label style="color:#FF0000;">*</label>Poilcy Expiration  Date:</label>  
+    </div>
+    <div class="col-sm-5">
+    <input type="date" formControlName="PolicyExpirationDt" class="form-control" name="PolicyExpirationDt" id="PolicyExpirationDt" [(ngModel)]="PolicyExpirationDt" (input)="CalculateDifference()">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="col-sm-5">
+    <span class="text-validation"
+    *ngIf="(policyFormControl['PolicyExpirationDt'].touched || submitted) && policyFormControl['PolicyExpirationDt'].errors?.['required']">
+     Please enter a valid policy expiration date
+    </span> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+    <label for="endDate">Term:</label>
+    </div>
+    <div class="col-sm-5">  
+    <input type="number" formControlName="Term" class="form-control" name="Term" id="Term" [(ngModel)]="Term" readonly >
+    </div>
+    </div>
+  <div class="row">
+    <div class="col-sm-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="col-sm-5">
+    <span class="text-validation"
+    *ngIf="(policyFormControl['Term'].touched || submitted) && policyFormControl['Term'].errors?.['pattern']">
+     Term should be 1 or greater than 1
+    </span> 
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-6">
+      <div style = "padding: 50px 100px 10px;" class="justify-content-end">
+            <button type="submit" class="btn btn-primary">Save</button>
+            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" (click)="SaveNext(policyDetailsForm.value)" >Next</button>
+          </div>
+          </div>
+      </div>
+  </div>
+  </form>
+  </section>
+  </ng-container>
+  
