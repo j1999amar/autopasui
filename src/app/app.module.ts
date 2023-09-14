@@ -52,6 +52,8 @@ import { MasterTableComponent } from './feature/master/core/master-table/master-
 import { MasterTableListComponent } from './feature/master/ui/master-table-list/master-table-list.component';
 import { MasterTableListTableComponent } from './feature/master/core/master-table-list-table/master-table-list-table.component';
 import { MasterTableListTableUI } from './feature/master/ui/master-table-list-table/master-table-list-table-ui.component';
+import { MasterTableListTableFormUiComponent } from './feature/master/ui/master-table-list-table-form-ui/master-table-list-table-form-ui.component';
+import { MasterTableListTableFormComponent } from './feature/master/core/master-table-list-table-form/master-table-list-table-form.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,9 @@ import { MasterTableListTableUI } from './feature/master/ui/master-table-list-ta
     MasterTableComponent,
     MasterTableListComponent,
     MasterTableListTableUI,
-    MasterTableListTableComponent
+    MasterTableListTableComponent,
+    MasterTableListTableFormUiComponent,
+    MasterTableListTableFormComponent,
   
   
   ],

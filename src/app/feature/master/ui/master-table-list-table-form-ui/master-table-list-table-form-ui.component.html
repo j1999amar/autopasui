@@ -1,0 +1,23 @@
+<form [formGroup]="tableFormField" (ngSubmit)="submitForm()">
+  <ng-container *ngFor="let field of fields">
+    <ng-container *ngIf="tableFormField.controls[field].errors ; then requiredField else notRequiredField  ">
+    </ng-container>
+
+      <ng-template #requiredField>
+        <label class="form-label" [for]="field">{{ field }} <span>*</span></label>
+        <input class="form-control" type="text" [id]="field" [formControlName]="field" />
+        <span *ngIf="tableFormField.controls[field].invalid && formSubmitFlag">
+          {{ field }} is required </span><br />
+      </ng-template>
+
+
+      
+
+      <ng-template #notRequiredField>
+        <label class="form-label" [for]="field">{{ field }} </label>
+        <input class="form-control" type="text" [id]="field" [formControlName]="field" />
+      </ng-template>
+
+  </ng-container>
+  <input type="submit" class="btn btn-primary mt-1" value="Submit" />
+</form>

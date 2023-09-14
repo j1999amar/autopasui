@@ -15,6 +15,7 @@ import { TabGroupEditComponent } from './shared/ui/tab-group-edit/tab-group-edit
 import { RateTableDetailsCoreComponent } from './feature/RateTable/core/rate-table-details-core/rate-table-details-core.component';
 import { MasterTableComponent } from './feature/master/core/master-table/master-table.component';
 import { MasterTableListTableComponent } from './feature/master/core/master-table-list-table/master-table-list-table.component';
+import { MasterTableListTableFormComponent } from './feature/master/core/master-table-list-table-form/master-table-list-table-form.component';
 
 const routes: Routes = [
   {path:"",component:DashboardComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: "ratetableslist", component:RatetablesListFormComponent},
   {path:"rating",component:RateTableDetailsCoreComponent},
   {path:"master",component:MasterTableComponent},
-  {path:"tableTypeList",component:MasterTableListTableComponent}
+  {path:"tableTypeList",component:MasterTableListTableComponent},
+  {path:"tableTypeListForm",component:MasterTableListTableFormComponent}
 ];
 
 @NgModule({

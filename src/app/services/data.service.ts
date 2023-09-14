@@ -13,5 +13,8 @@ export class DataService {
   updateSharedData(tableName: any) {
     this.sharedDataSubject.next(tableName);
   }
+  addTableForm(column:string[]){
+    this.sharedDataSubject.next(column);
+  }
 
 }

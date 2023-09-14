@@ -9,4 +9,6 @@
 button{
     margin: 2px;
 }
-
+.tableRow:hover{
+    background-color:aliceblue;
+}
