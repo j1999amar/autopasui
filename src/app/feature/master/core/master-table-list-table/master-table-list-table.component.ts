@@ -13,164 +13,32 @@ export class MasterTableListTableComponent implements OnInit {
   tableTypeList: any[] = [];
   keys: string[] = []
   tableName: any = ''
-
+ functionName=''
   ngOnInit(): void {
     this.dataService.sharedData$.subscribe(
       data => {
-        this.tableName = data
-        switch (this.tableName) {
-          case 'BodyType':
-            this.getAllBodyType();
-            break;
-          case 'FuelType':
-            this.getAllFuelType();
-            break;
-          case 'RTO':
-            this.getAllRTO();
-            break;
-          case 'VehicleType':
-            this.getAllVehicleType();
-            break;
-          case 'Brand':
-            this.getAllBrand();
-            break;
-          case 'Model':
-            this.getAllModel();
-            break;
-          case 'TransmissionType':
-            this.getAllTransmissionType();
-            break;
-          case 'Variant':
-            this.getAllVariant();
-            break;
-        }
+        this.tableName = data;
+        this.apicall(this.tableName);
       }
     )
   }
+
+  apicall(tableName:string){
+    this.masterTableList.apiGetCall(this.tableName).subscribe({
+      next: (response:Response[]) => {
+        this.tableTypeList = response
+        this.keys = this.extractColumnNames(this.tableTypeList)
+        this.keys.push('action')
+      },
+      error: (e:Error[]) => {
+        alert(`Error Fetching ${this.tableName} Table`)
+      }
+    });
+  }
+  
   extractColumnNames(data: any[]): string[] {
     if (Array.isArray(data) && data.length > 0) {
       return Object.keys(data[0]);
     }
     return [];
-  }
-  getAllBodyType() {
-    this.masterTableList.getBodyTypeTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-        },
-        error: (e) => {
-          alert("Error Fetching Body Type Table")
-        }
-      });
-
-  }
-
-  getAllFuelType() {
-    this.masterTableList.getFuelTypeTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-
-        },
-        error: (e) => {
-          alert("Error Fetching Fuel Type Table")
-        }
-      });
-  }
-
-  getAllRTO() {
-    this.masterTableList.getRTOTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-
-        },
-        error: (e) => {
-          alert("Error Fetching RTO Table")
-        }
-      });
-  }
-
-  getAllVehicleType() {
-    this.masterTableList.getAllVehicleTypeTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-
-        },
-        error: (e) => {
-          alert("Error Fetching VehicleType Table")
-        }
-      });
-  }
-
-  getAllBrand() {
-    this.masterTableList.getAllBrandTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-
-        },
-        error: (e) => {
-          alert("Error Fetching Brand Table")
-        }
-      });
-  }
-
-  getAllModel() {
-    this.masterTableList.getAllModelTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-
-        },
-        error: (e) => {
-          alert("Error Fetching Model Table")
-        }
-      });
-  }
-  getAllTransmissionType() {
-    this.masterTableList.getAllTransmissionTypeTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-
-        },
-        error: (e) => {
-          alert("Error Fetching Transmission Type Table")
-        }
-      });
-  }
-  getAllVariant() {
-    this.masterTableList.getAllVariantTable()
-      .subscribe({
-        next: (response) => {
-          this.tableTypeList = response
-          this.keys = this.extractColumnNames(this.tableTypeList)
-          this.keys.push('action')
-
-        },
-        error: (e) => {
-          alert("Error Fetching Variant Table")
-        }
-      });
-  }
-
-
-
-}
+  }}
