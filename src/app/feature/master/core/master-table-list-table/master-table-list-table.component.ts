@@ -9,28 +9,31 @@ import { MasterTableListTable } from 'src/app/services/master-table-list-table.s
 
 })
 export class MasterTableListTableComponent implements OnInit {
-  constructor(private masterTableList: MasterTableListTable, private dataService: DataService) { }
+  constructor(private masterTableList: MasterTableListTable, private dataService: DataService) { 
+    this.dataService.shareTableName$.subscribe(
+      data => {
+        this.tableName = data;
+      }
+    )
+    this.apicall(this.tableName);
+
+  }
   tableTypeList: any[] = [];
   keys: string[] = []
   tableName: any = ''
  functionName=''
   ngOnInit(): void {
-    this.dataService.sharedData$.subscribe(
-      data => {
-        this.tableName = data;
-        this.apicall(this.tableName);
-      }
-    )
+  
   }
 
   apicall(tableName:string){
     this.masterTableList.apiGetCall(this.tableName).subscribe({
-      next: (response:Response[]) => {
+      next: (response) => {
         this.tableTypeList = response
         this.keys = this.extractColumnNames(this.tableTypeList)
         this.keys.push('action')
       },
-      error: (e:Error[]) => {
+      error: (e) => {
         alert(`Error Fetching ${this.tableName} Table`)
       }
     });

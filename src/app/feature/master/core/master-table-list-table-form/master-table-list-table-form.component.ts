@@ -9,13 +9,12 @@ import { DataService } from 'src/app/services/data.service';
 export class MasterTableListTableFormComponent implements OnInit {
   passfields:Array<string>=[]
   constructor(private dataservice:DataService){
-    this.dataservice.sharedData$.subscribe(
+    this.dataservice.addTableFormFields$.subscribe(
       response=>{
         this.passfields=response
-      }
-      )
+      })
   }
   ngOnInit(): void {
-    
+
   }
 }

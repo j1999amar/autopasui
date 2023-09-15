@@ -18,7 +18,7 @@ export class MasterTableListComponent implements OnInit {
   }
   shareTableName(tableName:string){
     
-    this.dataService.updateSharedData(tableName)
+    this.dataService.shareTable(tableName)
 
   }
  

@@ -16,6 +16,7 @@ export class MasterTableListTable {
   private baseUrl = environment.baseUrl;
 
   apiGetCall(Name: string): Observable<any> {
+    console.log("api call")
     //Case name should be in correct format
     switch (Name) {
       case 'BodyType':
@@ -41,10 +42,9 @@ export class MasterTableListTable {
   }
 
 
-
+//#region Get  Tables Methods
   private getBodyType(): Observable<BodyType[]> {
     try {
-      console.log('api called')
       return this.http.get<BodyType[]>(this.baseUrl + 'BodyType/GetAllBodyType');
     } catch (error) {
       throw (error)
@@ -99,4 +99,5 @@ export class MasterTableListTable {
       throw (error)
     }
   }
+  //#endregion
 }

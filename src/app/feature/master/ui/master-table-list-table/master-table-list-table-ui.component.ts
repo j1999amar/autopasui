@@ -50,7 +50,4 @@ export class MasterTableListTableUI implements AfterViewInit {
 
 
 
-function compare(name: any, name1: any, isAsc: boolean) {
-  throw new Error('Function not implemented.');
-}
 
