@@ -1,24 +1,39 @@
-<div class=" container row ">
+<div class="container row">
   <div class="col-lg-12">
     <form [formGroup]="tableFormField" (ngSubmit)="submitForm()">
-      <div class="row ">
+      <div class="row">
         <div class="col-lg-6">
           <ng-container *ngFor="let field of fields">
-            <ng-container *ngIf="tableFormField.controls[field].errors ; then requiredField else notRequiredField  ">
+            <ng-container *ngIf="
+                tableFormField.controls[field].errors;
+                then requiredField;
+                else notRequiredField
+              ">
             </ng-container>
-            
-              <ng-template  #requiredField>
-                <label class="form-label" [for]="field">{{ field }} <span>*</span></label>
+
+            <ng-template #requiredField>
+              <label class="form-label" [for]="field">{{ field }} <span>*</span></label>
+              <input class="form-control" type="text" [id]="field" [formControlName]="field" />
+              <span *ngIf="tableFormField.controls[field].invalid && formSubmitFlag">
+                {{ field }} is required </span><br />
+            </ng-template>
+
+            <ng-template #notRequiredField>
+              <ng-container *ngIf="field == 'isActive'; then isActive; else isNotActive ">
+
+              </ng-container>
+            </ng-template>
+          
+            <ng-template #isNotActive>
+              <label class="form-label" [for]="field">{{ field }} </label>
                 <input class="form-control" type="text" [id]="field" [formControlName]="field" />
-                <span *ngIf="tableFormField.controls[field].invalid && formSubmitFlag">
-                  {{ field }} is required </span><br>
-              </ng-template>
-        
-              <ng-template  #notRequiredField>
-                <label class="form-label" [for]="field">{{ field }} </label>
-                <input class="form-control" type="text" [id]="field" [formControlName]="field" />
-              </ng-template>
-        
+            </ng-template>
+
+          
+            <ng-template #isActive>
+              <label class="form-label" [for]="field">{{ field }} </label>
+              <input type="checkbox" [id]="field" [formControlName]="field"  />
+            </ng-template>
           </ng-container>
         </div>
       </div>

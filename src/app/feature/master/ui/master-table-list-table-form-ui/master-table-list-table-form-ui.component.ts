@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class MasterTableListTableFormUiComponent implements OnInit {
   @Input() fields: Array<string> = []
   tableFormField!: FormGroup
-  formSubmitFlag=false
+  formSubmitFlag=false;
+  @Output() addForms=new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {
     this.tableFormField = this.fb.group({})
@@ -31,14 +32,13 @@ export class MasterTableListTableFormUiComponent implements OnInit {
      }else{
       const control = new FormControl('')
       this.tableFormField.addControl(field, control)
-
      }
     })
   }
   submitForm() {
     this.formSubmitFlag=true
     if (this.tableFormField.valid) {
-      console.log(this.tableFormField.value)
+      this.addForms.emit(this.tableFormField)
     }  }
 
 

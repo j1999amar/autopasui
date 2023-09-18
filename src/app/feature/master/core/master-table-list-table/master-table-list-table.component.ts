@@ -8,23 +8,17 @@ import { MasterTableListTable } from 'src/app/services/master-table-list-table.s
   styleUrls: ['./master-table-list-table.component.css'],
 
 })
-export class MasterTableListTableComponent implements OnInit {
+export class MasterTableListTableComponent {
   constructor(private masterTableList: MasterTableListTable, private dataService: DataService) { 
-    this.dataService.shareTableName$.subscribe(
-      data => {
-        this.tableName = data;
-      }
-    )
+   
+    this.tableName=this.dataService.shareTableName
     this.apicall(this.tableName);
 
   }
   tableTypeList: any[] = [];
   keys: string[] = []
   tableName: any = ''
- functionName=''
-  ngOnInit(): void {
-  
-  }
+
 
   apicall(tableName:string){
     this.masterTableList.apiGetCall(this.tableName).subscribe({
@@ -44,4 +38,7 @@ export class MasterTableListTableComponent implements OnInit {
       return Object.keys(data[0]);
     }
     return [];
-  }}
+  }
+
+
+}

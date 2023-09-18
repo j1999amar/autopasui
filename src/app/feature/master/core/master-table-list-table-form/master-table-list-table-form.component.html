@@ -1,1 +1,3 @@
-<app-master-table-list-table-form-ui *ngIf="passfields.length>0" [fields]="passfields"></app-master-table-list-table-form-ui>
+<app-master-table-list-table-form-ui *ngIf="passfields.length>0" [fields]="passfields"
+    (addForms)="addForm($event)"
+    ></app-master-table-list-table-form-ui>

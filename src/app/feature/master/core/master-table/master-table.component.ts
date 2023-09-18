@@ -12,6 +12,7 @@ constructor(private masterService:MasterService){
   this.masterService.getMasterTable()
   .subscribe({
     next: (response) => {
+      console.log(response)
       this.masterTableList=response
 
     },

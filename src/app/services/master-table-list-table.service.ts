@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BodyType, Brand, FuelType, Model, RTO, TransmissionType, Variant, VehicleType } from '../models/vehicle.model';
+import { Coverage } from '../models/coverage';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,8 @@ export class MasterTableListTable {
         return this.getAllTransmissionType();
       case 'Variant':
         return this.getAllVariant();
+        case 'Coverage':
+          return this.getAllCoverage();
       default:
         // Handle the default case or return undefined
         return throwError('Invalid Name'); // or return of(null);
@@ -42,7 +45,7 @@ export class MasterTableListTable {
   }
 
 
-//#region Get  Tables Methods
+  //#region Get  Tables Methods
   private getBodyType(): Observable<BodyType[]> {
     try {
       return this.http.get<BodyType[]>(this.baseUrl + 'BodyType/GetAllBodyType');
@@ -99,5 +102,44 @@ export class MasterTableListTable {
       throw (error)
     }
   }
+
+  private getAllCoverage(): Observable<Coverage[]> {
+    try {
+      return this.http.get<Coverage[]>(this.baseUrl + 'Coverages');
+    } catch (error) {
+      throw (error)
+    }
+  }
   //#endregion
+
+  apiPostCall(data: any, name: string): Observable<any> {
+    // let name='BodyType'
+    //Case name should be in correct format
+    switch (name) {
+      case 'BodyType':
+        return this.addBodyType(data);
+      case 'FuelType':
+        console.log('fuel')
+        console.log(data)
+        return this.addFuelType(data);
+      default:
+        // Handle the default case or return undefined
+        return throwError('Invalid Name'); // or return of(null);
+    }
+  }
+  addBodyType(data: BodyType): Observable<BodyType> {
+    try {
+      return this.http.post<BodyType>(this.baseUrl + 'BodYType/AddBodyType', data);
+    } catch (error) {
+      throw (error)
+    }
+  }
+  addFuelType(data: FuelType): Observable<FuelType> {
+    try {
+      return this.http.post<FuelType>(this.baseUrl + 'FuelType/AddFuelType', data);
+    } catch (error) {
+      throw (error)
+    }
+  }
+
 }

@@ -7,17 +7,18 @@ import { BehaviorSubject } from 'rxjs'
 export class DataService {
 
   constructor() { }
-  private shareTableName = new BehaviorSubject<any>('');
-  shareTableName$ = this.shareTableName.asObservable();
-
-  private addTableFormFields = new BehaviorSubject<any>('');
-  addTableFormFields$ = this.addTableFormFields.asObservable();
+  
+   shareTableName:string = ''
+   addTableFormFields:string[]=[]
 
   shareTable(tableName: any) {
-    this.shareTableName.next(tableName);
+    this.shareTableName=tableName
   }
   addTableForm(column:string[]){
-    this.addTableFormFields.next(column);
+    this.addTableFormFields=column
   }
+
+
+
 
 }
