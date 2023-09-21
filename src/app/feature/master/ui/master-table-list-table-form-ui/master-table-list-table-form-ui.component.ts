@@ -24,13 +24,15 @@ export class MasterTableListTableFormUiComponent implements OnInit {
 
   }
   addFromFields() {
+    
 
     this.fields.forEach(field => {
      if(field.includes('Id')){
       const control = new FormControl('',Validators.required)
       this.tableFormField.addControl(field, control)
-     }else{
-      const control = new FormControl('')
+     }
+     else {
+      const control = new FormControl()
       this.tableFormField.addControl(field, control)
      }
     })

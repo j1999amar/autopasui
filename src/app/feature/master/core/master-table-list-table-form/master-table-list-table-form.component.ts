@@ -20,21 +20,37 @@ export class MasterTableListTableFormComponent implements OnInit {
   }
   addForm(addFormData: any) {
     let data: any = addFormData.value
-    console.log(data)
-    if (!data.isActive) {
-      data.isActive = false
-    }
-    this.apiService.apiPostCall(data, this.tableName).subscribe({
-      next: (value) => {
-        alert(`Table ${this.tableName} is added successfully`)
-        window.history.back();
-      },
-      error: (err) => {
-        alert(err.error)
-      },
-    }
+    this.apiService.apiPostCall(data, this.tableName).subscribe(
+      {
+        next: (value) => {
+          alert(`Table ${this.tableName} is added successfully`)
+          window.history.back();
+        },
+        error: (err: any) => {
+          this.handleApiErrors(err)
+
+        },
+      }
     )
   }
+
+  handleApiErrors(error: any) {
+    if (error.status === 400 && error.error && error.error.errors) {
+      // Handle multiple errors here
+      const errorMessages = error.error.errors;
+      let errorKey
+
+      for (let key in error.error.errors) {
+        if (error.error.errors.hasOwnProperty(key)) {
+          alert(error.error.errors[key]);
+        }
+      }
+    } else {
+      alert('An error occurred: ' + error.error);
+    }
+  }
+
+
   ngOnInit(): void {
 
   }

@@ -13,27 +13,45 @@
 
             <ng-template #requiredField>
               <label class="form-label" [for]="field">{{ field }} <span>*</span></label>
-              <input class="form-control" type="text" [id]="field" [formControlName]="field" />
+              <input class="form-control" type="number" [id]="field" [formControlName]="field" />
               <span *ngIf="tableFormField.controls[field].invalid && formSubmitFlag">
                 {{ field }} is required </span><br />
             </ng-template>
 
             <ng-template #notRequiredField>
-              <ng-container *ngIf="field == 'isActive'; then isActive; else isNotActive ">
+                <ng-container *ngIf="field.includes('isActive'); then isActive; else date"></ng-container>
 
-              </ng-container>
-            </ng-template>
-          
-            <ng-template #isNotActive>
-              <label class="form-label" [for]="field">{{ field }} </label>
-                <input class="form-control" type="text" [id]="field" [formControlName]="field" />
+              <ng-template #date>
+                <ng-container *ngIf="field.includes('Dt'); then dateTimeField; else Sort"></ng-container>
+              </ng-template>
+
+              <ng-template #Sort>
+                <ng-container *ngIf="field.includes('sort'); then sortOrder; else textField"></ng-container>
+              </ng-template>
+
+              <ng-template #textField>
+                <label class="form-label" [for]="field">{{ field }} </label>
+                <input class="form-control" type="text" [id]="field" [formControlName]="field"  />
+              </ng-template>
+
             </ng-template>
 
-          
             <ng-template #isActive>
               <label class="form-label" [for]="field">{{ field }} </label>
-              <input type="checkbox" [id]="field" [formControlName]="field"  />
+              <input [formControlName]="field" type="checkbox" [id]="field" />
             </ng-template>
+
+            <ng-template #dateTimeField>
+              <label class="form-label" [for]="field">{{ field }} </label>
+              <input class="form-control" type="datetime-local" [id]="field" [formControlName]="field" />
+            </ng-template>
+
+            <ng-template #sortOrder>
+              <label class="form-label" [for]="field">{{ field }} </label>
+              <input class="form-control" type="number" [id]="field"  [formControlName]="field" />
+            </ng-template>
+
+
           </ng-container>
         </div>
       </div>
