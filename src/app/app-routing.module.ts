@@ -30,7 +30,9 @@ const routes: Routes = [
   {path:"rating",component:RateTableDetailsCoreComponent},
   {path:"master",component:MasterTableComponent},
   {path:"tableTypeList",component:MasterTableListTableComponent},
-  {path:"tableTypeListForm",component:MasterTableListTableFormComponent}
+  {path:"tableTypeListForm",component:MasterTableListTableFormComponent},
+  {path:"tableTypeListForm/:obj",component:MasterTableListTableFormComponent}
+
 ];
 
 @NgModule({

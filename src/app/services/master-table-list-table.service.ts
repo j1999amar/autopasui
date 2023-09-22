@@ -70,6 +70,33 @@ export class MasterTableListTable {
     }
   }
 
+  apieditCall(data:any,Name: string): Observable<any> {
+    //Case name should be in correct format
+    switch (Name) {
+      case 'BodyType':
+        return this.editBodyType(data);
+      case 'FuelType':
+        return this.editFuelType(data);
+      case 'RTO':
+        return this.editRTO(data);
+      case 'VehicleType':
+        return this.editVehicleType(data);
+      case 'Brand':
+        return this.editBrand(data);
+      case 'Model':
+        return this.editModel(data);
+      case 'TransmissionType':
+        return this.editTransmissionType(data);
+      case 'Variant':
+        return this.editVariant(data);
+      case 'Coverage':
+        return this.editCoverage(data);
+      default:
+        // Handle the default case or return undefined
+        return throwError('Invalid Name'); // or return of(null);
+    }
+  }
+
 
   //#region Get  Tables Methods
   private getBodyType(): Observable<BodyType[]> {
@@ -177,7 +204,7 @@ export class MasterTableListTable {
         city:data.city?? '',
         state:data.state?? '',
         description:data.description?? '',
-        IsActive:data.IsActive??false
+        isActive:data.isActive??false
       }
       return this.http.post<RTO>(this.baseUrl + 'RTO/AddRTO', sendData);
     } catch (error) {
@@ -208,7 +235,7 @@ export class MasterTableListTable {
         vehicleTypeId: data.vehicleTypeId ?? 0,
         description: data.description ?? '',
         sortOrder: data.sortOrder ?? 0,
-        IsActive: data.IsActive ?? false
+        isActive: data.isActive ?? false
     };    
       return this.http.post<Brand>(this.baseUrl + 'Brands/AddBrands', sendData);
     } catch (error) {
@@ -277,4 +304,144 @@ export class MasterTableListTable {
   }
   //#endregion
 
+  
+editBodyType(data: BodyType): Observable<BodyType> {
+  try {
+    const sendData:BodyType={
+      bodyTypeId:data.bodyTypeId ?? 0,
+      bodyType:data.bodyType ?? '',
+      description:data.description?? '',
+      isActive:data.isActive ?? false
+    }
+    return this.http.put<BodyType>(this.baseUrl + 'BodYType/EditBodyType', sendData);
+  } catch (error) {
+    throw (error)
+  }
 }
+editFuelType(data: FuelType): Observable<FuelType> {
+
+  try {
+    const sendData:FuelType={
+      fuelTypeId:data.fuelTypeId?? 0,
+      fuelType:data.fuelType?? '',
+      description:data.description?? '',
+      isActive:data.isActive?? false
+    }
+    return this.http.put<FuelType>(this.baseUrl + 'FuelType/EditFuelType', sendData);
+  } catch (error) {
+    throw (error)
+  }
+}
+
+editRTO(data: RTO): Observable<RTO> {
+  try {
+    const sendData:RTO={
+      rtoId: data.rtoId ?? 0,
+      rtoName: data.rtoName ?? '',
+      city: data.city ?? '',
+      state: data.state ?? '',
+      description: data.description ?? '',
+      isActive:data.isActive ?? false
+    }
+    console.log(sendData)
+    return this.http.put<RTO>(this.baseUrl + 'RTO/EditRTO', sendData);
+  } catch (error) {
+    throw (error)
+  }
+} 
+
+editVehicleType(data: VehicleType): Observable<VehicleType> {
+  try {
+    const sendData:VehicleType={
+      vehicleTypeId:data.vehicleTypeId?? 0,
+      vehicleType:data.vehicleType?? '',
+      description:data.description?? '',
+      isActive:data.isActive?? false
+    }
+    return this.http.put<VehicleType>(this.baseUrl + 'VehicleType/EditVehicleType', sendData);
+  } catch (error) {
+    throw (error)
+  }
+} 
+
+
+editBrand(data: Brand): Observable<Brand> {
+  try {  
+    const sendData: Brand = {
+      brand: data.brand ?? '',
+      brandId: data.brandId ?? 0,
+      vehicleTypeId: data.vehicleTypeId ?? 0,
+      description: data.description ?? '',
+      sortOrder: data.sortOrder ?? 0,
+      isActive: data.isActive ?? false
+  };    
+    return this.http.put<Brand>(this.baseUrl + 'Brands/EditBrands', sendData);
+  } catch (error) {
+    throw (error)
+  }
+} 
+
+editModel(data: Model): Observable<Model> {
+  try {
+    const sendData:Model={
+      modelId:data.modelId?? 0,
+      brandId:data.brandId?? 0,
+      modelName:data.modelName?? '',
+      description:data.description?? ''
+    }
+    return this.http.put<Model>(this.baseUrl + 'Model/EditModels', sendData);
+  } catch (error) {
+    throw (error)
+  }
+} 
+
+editTransmissionType(data: TransmissionType): Observable<TransmissionType> {
+  try {
+    const sendData:TransmissionType={
+      transmissionTypeId:data.transmissionTypeId?? 0,
+      transmissionType:data.transmissionType?? '',
+      description:data.description?? ''
+    }
+    return this.http.put<TransmissionType>(this.baseUrl + 'TransmissionType/EditTransmissionType', sendData);
+  } catch (error) {
+    throw (error)
+  }
+} 
+
+editVariant(data: Variant): Observable<Variant> {
+  try {
+    const sendData:Variant={
+      variantId:data.variantId??0,
+      variant:data.variant?? '',
+      description:data.description?? '',
+      isActive:data.isActive?? false
+    }
+    return this.http.put<Variant>(this.baseUrl + 'Variant/EditVariant', sendData);
+  } catch (error) {
+    throw (error)
+  }
+} 
+
+editCoverage(data: Coverage): Observable<Coverage> {
+  try {
+    const sendData:Coverage={
+      length:data.length??'',
+      coverageId:data.coverageId?? 0,
+      coverageName:data.coverageName?? '',
+      covCd:data.covCd?? '',
+      effectiveDt:data.effectiveDt?? new Date() ,
+      expirationDt: data.expirationDt?? new Date(),
+      description:data.description?? '',
+      sortOrder:data.sortOrder?? 0,
+      IsActive:data.IsActive?? false
+    }
+    return this.http.put<Coverage>(this.baseUrl + 'Coverages/EditCoverage', sendData);
+  } catch (error) {
+    throw (error)
+  }
+}
+
+}
+
+
+  

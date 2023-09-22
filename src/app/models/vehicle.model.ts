@@ -50,7 +50,7 @@ export interface RTOState{
     city: string, 
     state: string, 
     description: string,
-    IsActive:boolean
+    isActive:boolean
 }
 export interface RTOCity {
     rtoId: number, 
@@ -58,7 +58,7 @@ export interface RTOCity {
     city: string, 
     state: string, 
     description: string,
-    IsActive:boolean
+    isActive:boolean
 }
  export interface RTO {
     rtoId: number, 
@@ -66,7 +66,7 @@ export interface RTOCity {
     city: string, 
     state: string, 
     description: string,
-    IsActive:boolean
+    isActive:boolean
  }
 export interface Brand {
     brandId: number, 
@@ -74,7 +74,7 @@ export interface Brand {
     brand: string, 
     description: string, 
     sortOrder:number,
-    IsActive:boolean
+    isActive:boolean
 }
 export interface Model {
     modelId: number, 

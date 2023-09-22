@@ -33,6 +33,21 @@ export class MasterTableListTableFormComponent implements OnInit {
       }
     )
   }
+  updateForm(updateFormData: any) {
+    let data: any = updateFormData.value
+    this.apiService.apieditCall(data, this.tableName).subscribe(
+      {
+        next: (value) => {
+          alert(`Table ${this.tableName} is updated successfully`)
+          window.history.back();
+        },
+        error: (err: any) => {
+          this.handleApiErrors(err)
+
+        },
+      }
+    )
+  }
 
   handleApiErrors(error: any) {
     if (error.status === 400 && error.error && error.error.errors) {

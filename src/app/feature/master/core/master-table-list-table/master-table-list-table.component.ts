@@ -13,6 +13,7 @@ export class MasterTableListTableComponent {
    
     this.tableName=this.dataService.shareTableName
     this.apicall(this.tableName);
+    
 
   }
   tableTypeList: any[] = [];
@@ -38,6 +39,9 @@ export class MasterTableListTableComponent {
       return Object.keys(data[0]);
     }
     return [];
+  }
+  deleteRecord(data:any){
+    console.log(data)
   }
 
 

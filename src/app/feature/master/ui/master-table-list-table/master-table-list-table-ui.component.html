@@ -15,8 +15,8 @@
             {{ user[column] }}
           </ng-container>
           <ng-template #buttonCell>
-            <button class="btn btn-warning">Update</button>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-warning" [routerLink]="updateRouteUrl(user)" (click)="editTable(columnName)" >Update</button>
+            <button class="btn btn-danger" (click)="openDialog('800ms', '800ms',user)">Delete</button>
           </ng-template>
         </td>
     </ng-container>
@@ -30,6 +30,15 @@
   aria-label="Select page of periodic elements">
 </mat-paginator>
 
-<button class="btn btn-success" routerLink="/tableTypeListForm" (click)="addTable(columnName)"  >Add</button>
+<button class="btn btn-success" routerLink="/tableTypeListForm" (click)="addTable(columnName) "  >Add</button>
 
 </div>
+
+<!-- <h1 mat-dialog-title>Delete file</h1>
+<div mat-dialog-content>
+  Would you like to delete cat.jpeg?
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+</div> -->
