@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BodyType } from 'src/app/models/vehicle.model';
 import { DataService } from 'src/app/services/data.service';
@@ -8,6 +8,10 @@ import { MasterTableListTable } from 'src/app/services/master-table-list-table.s
   selector: 'app-master-table-list-table-form',
   templateUrl: './master-table-list-table-form.component.html',
   styleUrls: ['./master-table-list-table-form.component.css']
+  
+})
+@Injectable({
+  providedIn: 'root' // or a specific module if needed
 })
 export class MasterTableListTableFormComponent implements OnInit {
   passfields: Array<string> = []
@@ -20,6 +24,8 @@ export class MasterTableListTableFormComponent implements OnInit {
   }
   addForm(addFormData: any) {
     let data: any = addFormData.value
+    console.log(data)
+
     this.apiService.apiPostCall(data, this.tableName).subscribe(
       {
         next: (value) => {

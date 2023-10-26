@@ -41,7 +41,17 @@ export class MasterTableListTableComponent {
     return [];
   }
   deleteRecord(data:any){
-    console.log(data)
+    this.masterTableList.apiDeleteCall(this.tableName,data).subscribe({
+      next(value) {
+        alert('Record deleted successfully')
+        window.history.back();        
+      },
+      error(err) {
+        alert("Record can not be deleted'")        
+      },
+    }
+    )
+    
   }
 
 

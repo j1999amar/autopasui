@@ -25,6 +25,7 @@
 
     <tr class="tableRow" mat-row *matRowDef="let row; columns: columnName"></tr>
   </table>
+  
   <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
   showFirstLastButtons
   aria-label="Select page of periodic elements">
@@ -33,7 +34,6 @@
 <button class="btn btn-success" routerLink="/tableTypeListForm" (click)="addTable(columnName) "  >Add</button>
 
 </div>
-
 <!-- <h1 mat-dialog-title>Delete file</h1>
 <div mat-dialog-content>
   Would you like to delete cat.jpeg?

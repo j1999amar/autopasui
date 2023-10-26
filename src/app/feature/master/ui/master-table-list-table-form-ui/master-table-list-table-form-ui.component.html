@@ -20,7 +20,6 @@
 
             <ng-template #notRequiredField>
                 <ng-container *ngIf="field.includes('isActive'); then isActive; else date"></ng-container>
-
               <ng-template #date>
                 <ng-container *ngIf="field.includes('Dt'); then dateTimeField; else Sort"></ng-container>
               </ng-template>
@@ -59,3 +58,6 @@
     </form>
   </div>
 </div>
+
+
+input
